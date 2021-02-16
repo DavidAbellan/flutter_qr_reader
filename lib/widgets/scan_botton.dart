@@ -11,7 +11,7 @@ class ScanBotton extends StatelessWidget {
           String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
               '#3D8BEF', 'Cancelar', false, ScanMode.QR);
           print('respuestaaaa');
-          print(barcodeScanRes.toString());
+          print(barcodeScanRes);
         });
   }
 }
