@@ -8,8 +8,14 @@ class ScanBotton extends StatelessWidget {
         elevation: 0,
         child: Icon(Icons.filter_center_focus),
         onPressed: () async {
-          String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-              '#3D8BEF', 'Cancelar', false, ScanMode.QR);
+          String barcodeScanRes;
+          try {
+            barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+                "#ff6666", "Cancel", true, ScanMode.QR);
+            print(barcodeScanRes);
+          } catch (error) {
+            barcodeScanRes = 'Failed to get platform version.';
+          }
           print('respuestaaaa');
           print(barcodeScanRes);
         });
