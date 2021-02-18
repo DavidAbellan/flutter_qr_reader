@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qrreader/providers/scan_list_provider.dart';
+import 'package:qrreader/utils/utils.dart' as util;
 
 class DireccionesPage extends StatelessWidget {
   @override
@@ -9,7 +10,17 @@ class DireccionesPage extends StatelessWidget {
 
     return ListView.builder(
         itemCount: scanListProvider.scans.length,
-        itemBuilder: (_, i) => ListTile(
+        itemBuilder: (_, i) => Dismissible(
+            key: Key(scanListProvider.scans[i].id.toString()),
+            direction: DismissDirection.startToEnd,
+            background: Container(
+              color: Colors.red,
+            ),
+            onDismissed: (DismissDirection direction) {
+              Provider.of<ScanListProvider>(context, listen: false)
+                  .borrarScansPorId(scanListProvider.scans[i].id);
+            },
+            child: ListTile(
               leading: Icon(Icons.home, color: Theme.of(context).primaryColor),
               title: Text(scanListProvider.scans[i].valor),
               subtitle: Text(scanListProvider.scans[i].id.toString()),
@@ -17,7 +28,7 @@ class DireccionesPage extends StatelessWidget {
                 Icons.keyboard_arrow_right,
                 color: Colors.grey,
               ),
-              onTap: () => print('abrir dirección...'),
-            ));
+              onTap: () => util.launchURL(scanListProvider.scans[i], context),
+            )));
   }
 }
