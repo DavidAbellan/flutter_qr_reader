@@ -20,8 +20,6 @@ class ScanBotton extends StatelessWidget {
             barcodeScanRes = 'Failed to get platform version.';
           }
 
-          //Api key AIzaSyCFdo3-EpAeQPUN4AAjWKO4lfjfoi9vltc
-
           ///if el usuario cancela
           if (barcodeScanRes == '-1') {
             return;
